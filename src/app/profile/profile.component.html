@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<h6 class="heading">PROFILE</h6>
+<hr style="width: 100%"/>
+<div class="profile-info">
+  <div class="data-section">
+    <div class="info-label">Name</div>
+    <div
+      class="info-value">{{auth.user.userInfo.firstName}} {{auth.user.userInfo.middleName}} {{auth.user.userInfo.lastName}}</div>
+  </div>
+
+  <div class="data-section">
+    <div class="info-label">E-mail</div>
+    <div class="info-value">{{auth.user.email}}</div>
+  </div>
+
+  <div class="data-section">
+    <div class="info-label">Mailing Address</div>
+    <div class="info-value">{{auth.user.userInfo.mailAddress}}</div>
+  </div>
+
+  <div class="data-section">
+    <div class="info-label">Occupation</div>
+    <div class="info-value">{{auth.user.userInfo.occupation}}</div>
+  </div>
+
+  <div class="data-section">
+    <div class="info-label">Mobile phone number</div>
+    <div class="info-value">{{auth.user.userInfo.phoneNumber}}</div>
+  </div>
+  <a class="a-button edit-button">Edit</a>
+</div>

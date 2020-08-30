@@ -1,0 +1,40 @@
+<div class="header" >
+  <a routerLink="/home">
+    <span id="logo">Email-Classification-System</span>
+  </a>
+  <button (click)="logout()" *ngIf="auth.user" id="logout" >Logout</button>
+
+</div>
+
+<div *ngIf="!auth.user">
+  <app-login></app-login>
+</div>
+
+<div *ngIf="auth.user">
+  hello welcome {{auth.user.username}}
+  <br/>
+  <div>
+    <button mat-raised-button routerLink="/profile">View Profile</button>
+  </div>
+  <input type="file">Upload the file and start the classification
+
+
+</div>
+
+
+
+<div *ngIf="showalert" style="z-index: 10; position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Logout Success!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>We will miss you:)</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
