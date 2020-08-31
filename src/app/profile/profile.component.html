@@ -1,30 +1,357 @@
-<h6 class="heading">PROFILE</h6>
-<hr style="width: 100%"/>
-<div class="profile-info">
-  <div class="data-section">
-    <div class="info-label">Name</div>
+<div class="container">
+  <div class="row" style="width: 100%">
+    <h1 class="heading">PROFILE</h1>
+    <hr style="width: 100%; margin: 0" />
     <div
-      class="info-value">{{auth.user.userInfo.firstName}} {{auth.user.userInfo.middleName}} {{auth.user.userInfo.lastName}}</div>
-  </div>
+      class="profile-info"
+      *ngIf="!this.checkedEditAddress && !this.changePassword"
+    >
+      <div class="data-section">
+        <div class="info-label">Name</div>
+        <div class="info-value">
+          {{ auth.user.userInfo.firstName }}
+          {{ auth.user.userInfo.middleName }}
+          {{ auth.user.userInfo.lastName }}
+        </div>
+      </div>
 
-  <div class="data-section">
-    <div class="info-label">E-mail</div>
-    <div class="info-value">{{auth.user.email}}</div>
-  </div>
+      <div class="data-section">
+        <div class="info-label">E-mail</div>
+        <div class="info-value">{{ auth.user.email }}</div>
+      </div>
 
-  <div class="data-section">
-    <div class="info-label">Mailing Address</div>
-    <div class="info-value">{{auth.user.userInfo.mailAddress}}</div>
-  </div>
+      <div class="data-section">
+        <div class="info-label">Mailing Address</div>
+        <div class="info-value">{{ auth.user.userInfo.mailAddress }}</div>
+      </div>
 
-  <div class="data-section">
-    <div class="info-label">Occupation</div>
-    <div class="info-value">{{auth.user.userInfo.occupation}}</div>
-  </div>
+      <div class="data-section">
+        <div class="info-label">Occupation</div>
+        <div class="info-value">{{ auth.user.userInfo.occupation }}</div>
+      </div>
 
-  <div class="data-section">
-    <div class="info-label">Mobile phone number</div>
-    <div class="info-value">{{auth.user.userInfo.phoneNumber}}</div>
+      <div class="data-section">
+        <div class="info-label">Mobile phone number</div>
+        <div class="info-value">{{ auth.user.userInfo.phoneNumber }}</div>
+      </div>
+      <div
+        class="data-section"
+        *ngIf="!this.checkedEditAddress && !this.changePassword"
+      >
+        <input
+          type="checkbox"
+          class="a-button edit-button"
+          (click)="checkingBox($event)"
+          id="edit-address"
+          name="edit-address"
+          style="display: none"
+        />
+        <label for="edit-address" class="a-button edit-button">EDIT</label>
+      </div>
+      <div
+        class="data-section"
+        *ngIf="!this.checkedEditAddress && !this.changePassword"
+      >
+        <input
+          type="checkbox"
+          class="a-button edit-button"
+          (click)="passwordCheckBox($event)"
+          id="change-password"
+          name="change-password"
+          style="display: none"
+        />
+        <label for="change-password" class="a-button edit-button">
+          Change Password & Username
+        </label>
+      </div>
+    </div>
+
+    <form
+      #formData="ngForm"
+      (ngSubmit)="saveChanges(formData)"
+      style="width: 100%"
+    >
+      <div
+        class="profile-info"
+        *ngIf="this.checkedEditAddress && !this.changePassword"
+      >
+        <div class="form-group">
+          <label for="id" hidden="true">id</label>
+          <input
+            type="hidden"
+            class="form-control a-input"
+            id="id"
+            name="id"
+            [(ngModel)]="auth.user.userInfo.id"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="firstName"
+            name="firstName"
+            [(ngModel)]="auth.user.userInfo.firstName"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="middleName">Middle Name</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="middleName"
+            name="middleName"
+            [(ngModel)]="auth.user.userInfo.middleName"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="lastName"
+            name="lastName"
+            [(ngModel)]="auth.user.userInfo.lastName"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="mailAddress">Mailing Address</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="mailAddress"
+            name="mailAddress"
+            [(ngModel)]="auth.user.userInfo.mailAddress"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="occupation">Occupation</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="occupation"
+            name="occupation"
+            [(ngModel)]="auth.user.userInfo.occupation"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Mobile phone number</label>
+          <input
+            type="text"
+            class="form-control a-input"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="auth.user.userInfo.phoneNumber"
+            ngModel
+          />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div
+              class="data-section"
+              *ngIf="this.checkedEditAddress && !this.changePassword"
+            >
+              <input
+                type="button"
+                class="a-button edit-button"
+                (click)="checkingBox($event)"
+                id="cancel-btn"
+                name="cancel-btn"
+                style="display: none"
+              />
+              <label for="cancel-btn" class="a-button edit-button"
+              >Cancel</label
+              >
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="data-section"
+              *ngIf="this.checkedEditAddress && !this.changePassword"
+            >
+              <button
+                type="submit"
+                class="a-button edit-button"
+                id="save-changes"
+                name="save-changes"
+                style="display: none"
+              ></button>
+              <label for="save-changes" class="a-button edit-button"
+              >Save Changes</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form
+      #passwordFormData="ngForm"
+      (ngSubmit)="savePassword(passwordFormData)"
+      style="width: 100%"
+    >
+      <div
+        class="profile-info"
+        *ngIf="!this.checkedEditAddress && this.changePassword"
+      >
+        <div class="form-group">
+          <label for="id" hidden="true">id</label>
+          <input
+            type="hidden"
+            class="form-control a-input"
+            id="id"
+            name="id"
+            [(ngModel)]="auth.user.userInfo.id"
+            ngModel
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="current-password">Current Password</label>
+          <input
+            matInput
+            type="text"
+            class="form-control a-input"
+            id="current-password"
+            name="currentPassword"
+            required
+            (keyup)="getCurrentPassword($event)"
+            ngModel
+          />
+          <div
+            class="error"
+            *ngIf="currentPasswordNotSame"
+            style="color: crimson"
+          >
+            Password not match current password!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="new-password">New Password</label>
+          <input
+            matInput
+            type="text"
+            class="form-control a-input"
+            id="new-password"
+            name="newPassword"
+            ngModel
+            #psw="ngModel"
+            required
+            minlength="6"
+            (keyup)="getNewPassword($event)"
+          />
+          <div
+            *ngIf="psw.errors?.required && psw.touched"
+            class="error"
+            style="color: crimson"
+          >
+            Password is required!
+          </div>
+          <div
+            *ngIf="psw.errors?.minlength && psw.touched"
+            class="error"
+            style="color: crimson"
+          >
+            Password must longer than 5
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmed-password">Confirmed Password</label>
+          <input
+            matInput
+            type="text"
+            class="form-control a-input"
+            id="confirmed-password"
+            name="confirmedPassword"
+            ngModel
+            required
+            (keyup)="getinput($event)"
+          />
+          <div class="error" *ngIf="passwordNotSame" style="color: crimson">
+            Password not match!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            matInput
+            type="text"
+            class="form-control a-input"
+            id="username"
+            name="username"
+            ngModel
+            #username="ngModel"
+            [(ngModel)]="name"
+
+            required
+            minlength="4"
+          />
+          <div
+            *ngIf="username.errors?.minlength && username.touched"
+            class="error"
+            style="color: crimson"
+          >
+            Username must longer than 3
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div
+              class="data-section"
+              *ngIf="!this.checkedEditAddress && this.changePassword"
+            >
+              <input
+                type="button"
+                class="a-button edit-button"
+                (click)="passwordCheckBox($event)"
+                id="cancel-btn-psw"
+                name="cancel-btn-psw"
+                style="display: none"
+              />
+              <label for="cancel-btn-psw" class="a-button edit-button"
+              >Cancel</label
+              >
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="data-section"
+              *ngIf="!this.checkedEditAddress && this.changePassword"
+            >
+              <button
+                mat-raised-button
+                type="submit"
+                class="a-button edit-button"
+                id="save-changes-psw"
+                name="save-changes-psw"
+                style="display: none"
+                [disabled]="passwordNotSame || currentPasswordNotSame"
+              ></button>
+              <label for="save-changes-psw" class="a-button edit-button"
+              >Save Changes</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
-  <a class="a-button edit-button">Edit</a>
 </div>

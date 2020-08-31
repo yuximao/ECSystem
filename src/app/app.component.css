@@ -1,7 +1,48 @@
-.container{
-  height: 100%;
+.navbar-brand {
   width: 100%;
+  /* margin-top: 25px; */
+  text-align: left;
+  letter-spacing: 0.1em;
+  font-weight: lighter;
+  font-family: "JohnstonITCStd-Medium", Helvetica, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  letter-spacing: 0.1em;
+  font-weight: lighter;
+  font-family: "JohnstonITCStd-Medium", Helvetica, Roboto, Arial, sans-serif;
+  width: 25%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.a-button.edit-button {
+  width: 100%;
+  padding-right: 6px;
+  padding-left: 6px;
+  margin-top: 16px;
+}
+
+.a-button.edit-button {
+  color: #fff;
+  background-color: #444;
+  border: 1px solid #444;
+  font-size: 13px;
+  line-height: 21px;
+  letter-spacing: 0.0825em;
+  text-transform: uppercase;
+  font-family: "Gill Sans MT Pro Medium", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+  padding: 12px 9px 8px 9px;
+  display: block;
+  margin-bottom: 17px;
 }

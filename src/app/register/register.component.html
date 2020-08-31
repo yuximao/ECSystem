@@ -1,15 +1,21 @@
 <mat-card class="matC">
 
   <h1 style="display: inline">Register</h1>
-  <mat-icon aria-hidden="false" aria-label="Example home icon" routerLink="/home"
-            style="margin-left: 80%;">home
-  </mat-icon>
+  <br/> <br/>
   <form class="example-form" #f="ngForm" (ngSubmit)="register(f);">
 
-    <mat-form-field class="example-full-width">
-      <mat-label>UserName</mat-label>
-      <input matInput placeholder="Ex. YuxiMao" name="username" #uname="ngModel" (keyup)="getName($event)"
-             [(ngModel)]="user.username" required minlength="3">
+    <div class="form-group">
+      <label >UserName</label>
+      <input
+        matInput
+        type="text"
+        class="form-control a-input"
+        name="username"
+        #uname="ngModel"
+        (keyup)="getName($event)"
+        [(ngModel)]="user.username"
+        required minlength="4"
+      />
       <div *ngIf="uname.errors?.required && uname.touched" class="error" style="color: crimson">
         Username is Required!
       </div>
@@ -19,101 +25,157 @@
       <div *ngIf="checkName" class="error" style="color: crimson">
         Username is already exist!
       </div>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Ex. tom@gmail.com" name="email" #email="ngModel"
-             [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$">
+    </div>
+
+    <div class="form-group">
+      <label >Email</label>
+      <input
+        matInput
+        type="text"
+        class="form-control a-input"
+        name="email" #email="ngModel"
+        [(ngModel)]="user.email"
+        required
+        pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$"
+      />
       <div *ngIf="email.errors?.required && email.touched" class="error" style="color: crimson">
         email is required!
       </div>
       <div *ngIf="email.errors?.pattern && email.touched" class="error" style="color: crimson">
         email Not correct!
       </div>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input matInput name="password" [(ngModel)]="user.password" #psw="ngModel"
-             required minlength="6" type="password" reverse="true">
+    </div>
+
+    <div class="form-group">
+      <label >Password</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="password"
+        [(ngModel)]="user.password"
+        #psw="ngModel"
+        required
+        minlength="6"
+        type="password"
+        reverse="true"
+      />
       <div *ngIf="psw.errors?.required && psw.touched" class="error" style="color: crimson">
         Password is required!
       </div>
       <div *ngIf="psw.errors?.minlength && psw.touched" class="error" style="color: crimson">
         Password must longer than 5
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Confirm Password</mat-label>
-      <input matInput name="repeat" type="password" required
-             reverse="false" (keyup)="getinput($event)">
-
-      <!--      <div  class="error" style="color: crimson">-->
-      <!--        Please confirm the password-->
-      <!--      </div>-->
+    <div class="form-group">
+      <label >Confirm Password</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="repeat"
+        type="password"
+        required
+        reverse="false"
+        (keyup)="getinput($event)"
+      />
       <div class="error" *ngIf="showwarn" style="color: crimson">
         Password not match!
       </div>
-    </mat-form-field>
-
+    </div>
 
     <!--    profile-->
-    <mat-form-field class="example-full-width">
-      <mat-label>phoneNumber</mat-label>
-      <input matInput placeholder="Ex. 8166948761" name="phoneNumber" #phoneNumber="ngModel"
-             [(ngModel)]="user.userInfo.phoneNumber" required>
-      <div *ngIf="firstName.errors?.required && phoneNumber.touched" class="error" style="color: crimson">
+    <div class="form-group">
+      <label >PhoneNumber</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="phoneNumber"
+        #phoneNumber="ngModel"
+        [(ngModel)]="user.userInfo.phoneNumber"
+        required
+      />
+      <div *ngIf="phoneNumber.errors?.required && phoneNumber.touched" class="error" style="color: crimson">
         phoneNumber is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>firstName</mat-label>
-      <input matInput placeholder="Ex. Yuxi" name="firstName" #firstName="ngModel"
-             [(ngModel)]="user.userInfo.firstName" required>
+    <div class="form-group">
+      <label >FirstName</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="firstName"
+        #firstName="ngModel"
+        [(ngModel)]="user.userInfo.firstName"
+        required
+      />
       <div *ngIf="firstName.errors?.required && firstName.touched" class="error" style="color: crimson">
         firstName is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>middleName</mat-label>
-      <input matInput placeholder="Ex. Mr." name="middleName" #middleName="ngModel"
-             [(ngModel)]="user.userInfo.middleName" required>
+    <div class="form-group">
+      <label >MiddleName</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="middleName"
+        #middleName="ngModel"
+        [(ngModel)]="user.userInfo.middleName"
+        required
+      />
       <div *ngIf="middleName.errors?.required && middleName.touched" class="error" style="color: crimson">
         middleName is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>lastName</mat-label>
-      <input matInput placeholder="Ex. Mao" name="lastName" #lastName="ngModel"
-             [(ngModel)]="user.userInfo.lastName" required>
+    <div class="form-group">
+      <label >LastName</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="lastName"
+        #lastName="ngModel"
+        [(ngModel)]="user.userInfo.lastName"
+        required
+      />
       <div *ngIf="lastName.errors?.required && lastName.touched" class="error" style="color: crimson">
         lastName is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>occupation</mat-label>
-      <input matInput placeholder="" name="occupation" #occupation="ngModel"
-             [(ngModel)]="user.userInfo.occupation" required>
+    <div class="form-group">
+      <label >Occupation</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="occupation"
+        #occupation="ngModel"
+        [(ngModel)]="user.userInfo.occupation"
+        required
+      />
       <div *ngIf="occupation.errors?.required && occupation.touched" class="error" style="color: crimson">
         occupation is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>mailAddress</mat-label>
-      <input matInput placeholder="Street, City, State" name="mailAddress" #mailAddress="ngModel"
-             [(ngModel)]="user.userInfo.mailAddress" required>
+    <div class="form-group">
+      <label >MailAddress</label>
+      <input
+        matInput
+        class="form-control a-input"
+        name="mailAddress"
+        #mailAddress="ngModel"
+        [(ngModel)]="user.userInfo.mailAddress"
+        required
+      />
       <div *ngIf="mailAddress.errors?.required && mailAddress.touched" class="error" style="color: crimson">
-        mailAddress is required!
+        occupation is required!
       </div>
-    </mat-form-field>
+    </div>
 
-    <button mat-raised-button type="submit" [disabled]="passwordNotSame || f.invalid || checkName">Submit</button>
-    &nbsp;&nbsp;
+    <button class="a-button edit-button" type="submit" [disabled]="passwordNotSame || f.invalid || checkName">Submit</button>
+    &nbsp;
     <a routerLink="/login">Back to Login</a>
 
   </form>
@@ -127,10 +189,8 @@
       <h1>Success!</h1>
     </div>
     <div style="display:flex;justify-content: center">
-      <h3>Click to back</h3>
+      <h3>Welcome to join</h3>
     </div>
-    <div class="modal-footer" style=" justify-content: center">
-      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
-    </div>
+      <button type="button" class="a-button edit-button" (click)="goHome()">OK</button>
   </mat-card>
 </div>

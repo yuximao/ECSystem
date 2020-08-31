@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from './shared/services/AuthService';
+import {AutoLogoutService} from './shared/services/AutoLogoutService';
+import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +11,32 @@ import {AuthService} from './shared/services/AuthService';
 })
 export class AppComponent {
   title = 'ECSystem';
-  constructor(private auth: AuthService) {
+  constructor(public auth: AuthService, public autoLogout: AutoLogoutService, public cookie: CookieService,
+              public router: Router) {
+    this.autoLogout.check();
+    this.autoLogout.initListener();
+    this.autoLogout.initInterval();
   }
 
-  // ngOnInit(): void {
-  //   this.auth.getUser()
-  //     .subscribe(u => {
-  //       if (u.success) {
-  //         this.auth.user = u.user;
-  //         this.auth.uid = u.user.id;
-  //         this.auth.getProfile(this.auth.uid)
-  //           .subscribe(p => {
-  //               this.auth.profile = p;
-  //             });
-  //       }
-  //     });
-  // }
+  showalert = false;
+
+
+  logout() {
+    this.cookie.deleteAll();
+    this.auth.logout()
+      .subscribe(res => {
+        if (res.success) {
+          this.auth.user = null;
+          this.auth.profile = null;
+          this.auth.uid = null;
+          this.auth.psw = null;
+          this.showalert = true;
+        }
+      });
+  }
+  goHome() {
+    this.showalert = false;
+    this.router.navigateByUrl('/home');
+  }
+
 }

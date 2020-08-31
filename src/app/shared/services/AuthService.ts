@@ -7,10 +7,12 @@ import {Observable} from 'rxjs';
 export class AuthService {
   constructor(private hc: HttpClient) {
   }
+
   user = null;
   uid: number;
   profile: any;
   psw: any;
+
   login(user): Observable<any> {
     const userData = new HttpParams()
       .append('username', user.username)
@@ -21,9 +23,9 @@ export class AuthService {
       {withCredentials: true});
   }
 
-  logout(): Observable<{success: boolean}> {
+  logout(): Observable<{ success: boolean }> {
     // @ts-ignore
-    return this.hc.post<{success: boolean}>(
+    return this.hc.post<{ success: boolean }>(
       `${environment.API_URL}/logout`,
       {withCredentials: true});
   }
@@ -34,6 +36,7 @@ export class AuthService {
       {withCredentials: true}
     );
   }
+
   // @ts-ignore
   newUser(user): Observable<any> {
     return this.hc.post<any>(
@@ -42,17 +45,31 @@ export class AuthService {
       {withCredentials: true});
 
   }
-  updateProfile(p): Observable<any> {
+
+  updateUserInfo(p): Observable<any> {
     return this.hc.put<any>(
-      `${environment.API_URL}/profile`,
+      `${environment.API_URL}/userInfos`,
       p,
       {withCredentials: true}
     );
   }
+
   checkUser(username): Observable<any> {
     return this.hc.post<any>(
       `${environment.API_URL}/users/checkuser`,
       username,
       {withCredentials: true});
+  }
+
+
+  changePass(user): Observable<any> {
+    return this.hc.put<any>(
+      `${environment.API_URL}/users/changePassword`,
+      user,
+      {withCredentials: true});
+  }
+
+  sendEmailForForgetPassword(email: any): Observable<any> {
+    return this.hc.post(`${environment.API_URL}/mail/forgetPassword`, email);
   }
 }

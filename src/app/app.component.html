@@ -1,3 +1,59 @@
-<div class="container">
+<nav class="navbar navbar-light bg-light">
+  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <li>
+      <a class="navbar-brand" routerLink="/home">Email-Classification-System</a>
+    </li>
+  </ul>
+  <ul class="navbar-nav my-2 my-lg-0">
+    <li>
+      <a
+        *ngIf="!auth.user"
+        routerLink="/home"
+        routerLinkActive="active"
+        class="nav-link"
+      >LOGIN</a
+      >
+    </li>
+    <li>
+      <a
+        *ngIf="auth.user"
+        routerLink="/home"
+        routerLinkActive="active"
+        class="nav-link"
+        (click)="logout()"
+      >LOGOUT</a
+      >
+    </li>
+  </ul>
+</nav>
+<div>
   <router-outlet></router-outlet>
+</div>
+
+
+<div
+  *ngIf="showalert"
+  style="
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 0vh;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+  "
+>
+  <mat-card style="width: 40vw; height: 200px; top: 30vh">
+    <br />
+    <div style="display: flex; justify-content: center">
+      <h2>Logout Success!</h2>
+    </div>
+    <div style="display: flex; justify-content: center">
+      <h4>We will miss you:)</h4>
+    </div>
+      <button type="button" class="a-button edit-button" (click)="goHome()">
+        OK
+      </button>
+  </mat-card>
 </div>

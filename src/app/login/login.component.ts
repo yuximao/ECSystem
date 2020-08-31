@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/services/AuthService';
 import {Router} from '@angular/router';
 
@@ -10,7 +10,21 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   showalert = false;
-  constructor(public auth: AuthService, private router: Router) {}
+  emailAlart = false;
+  forgetPasswordChecked = false;
+  email = '';
+
+  constructor(public auth: AuthService, private router: Router) {
+  }
+
+  checkingBox(e: { target: { checked: any } }) {
+    if (e.target.checked) {
+      this.forgetPasswordChecked = true;
+    } else {
+      this.forgetPasswordChecked = false;
+    }
+  }
+
   Submit(form) {
     this.auth.login(form.value)
       .subscribe(res => {
@@ -22,8 +36,23 @@ export class LoginComponent implements OnInit {
                 this.router.navigateByUrl('/home');
               }
             );
-        } else {this.showalert = true; }
+        } else {
+          this.showalert = true;
+        }
       });
+  }
+
+  sendEmail() {
+    let emailAddress = [];
+    emailAddress.push(this.email);
+    this.auth.sendEmailForForgetPassword(emailAddress)
+      .subscribe((res: any) => {
+      if (res.success) {
+        this.forgetPasswordChecked = false;
+      } else {
+        this.emailAlart = true;
+      }
+    });
   }
 
   ngOnInit(): void {

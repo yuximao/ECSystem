@@ -1,40 +1,22 @@
-<div class="header" >
-  <a routerLink="/home">
-    <span id="logo">Email-Classification-System</span>
-  </a>
-  <button (click)="logout()" *ngIf="auth.user" id="logout" >Logout</button>
-
-</div>
-
 <div *ngIf="!auth.user">
   <app-login></app-login>
 </div>
 
-<div *ngIf="auth.user">
-  hello welcome {{auth.user.username}}
-  <br/>
-  <div>
-    <button mat-raised-button routerLink="/profile">View Profile</button>
+<div class="container" *ngIf="auth.user">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">Welcome, {{ auth.user.username }}!</h5>
+      <button class="a-button edit-button" routerLink="/profile">View Profile</button>
+      <br/>
+      <h5 class="card-title">{{ auth.user.username }}, please upload a file and get the classification result</h5>
+      <label class="a-button edit-button">
+        <input type="file" style="display: none;" multiple="true" (change)="onFileUpload($event)">
+        <span>Upload the File</span>
+      </label>
+      <p *ngIf="!(classResult==null)">Your Classification result is: {{classResult}}</p>
+    </div>
   </div>
-  <input type="file">Upload the file and start the classification
-
 
 </div>
 
-
-
-<div *ngIf="showalert" style="z-index: 10; position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
-  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
-    <br>
-    <div style="display:flex;justify-content: center">
-      <h1>Logout Success!</h1>
-    </div>
-    <div style="display:flex;justify-content: center">
-      <h3>We will miss you:)</h3>
-    </div>
-    <div class="modal-footer" style=" justify-content: center">
-      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
-    </div>
-  </mat-card>
-</div>
 

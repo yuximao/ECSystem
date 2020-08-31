@@ -18,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import {RepeatValidatorDirective} from './register/RepeatValidatorDirective';
 import {MatIconModule} from '@angular/material/icon';
 import { ProfileComponent } from './profile/profile.component';
+import {DataService} from './shared/services/DataService';
+import {AutoLogoutService} from './shared/services/AutoLogoutService';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [AuthService, CookieService],
+  providers: [AuthService, CookieService, DataService, AutoLogoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
